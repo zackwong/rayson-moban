@@ -1,0 +1,1130 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>仓管</title>
+    <meta name="applicable-device" content="pc,mobile">
+    <link rel="apple-touch-icon" href="https://www.rayson.com.cn/images/assets/rayson-icon.jpg">
+    <meta name="apple-mobile-web-app-title" content="仓管">
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/element-ui-index.css">
+    <link rel="stylesheet" href="assets/paging.css">
+    <script type="text/javascript">
+      var userAgent = navigator.userAgent;
+      if (userAgent.indexOf("Chrome") < 1 && userAgent.indexOf("Safari") < 1)
+        window.location = "https://www.baidu.com";
+    </script>
+  </head>
+<body>
+<div id="app">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="navbar-brand">仓管</span>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="cangguan.html">仓管</a></li>
+                    <li><a href="anlytics.html" target="_blank">统计分析</a></li>
+                    <li><a href="search.html" target="_blank">机身码查询</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div style="margin-top:90px"></div>
+    <div class="container">
+        <div class="row" style="margin-bottom:30px">
+            <form id="search" onsubmit="return search('#search')">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">单号</div>
+                            <input name="orderId" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">产品型号</div>
+                            <input name="productModel" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">机身码</div>
+                            <input name="machineId" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-bottom:20px">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">销售日期</div>
+                            <div id="dateSelector_salesBeginTime">
+                                <select style="height: 30px; width: 100px" id="idYear_salesBeginTime" data="-1"></select>
+                                <select style="height: 30px; width: 50px" id="idMonth_salesBeginTime" data="-1"></select>
+                                <select style="height: 30px; width: 50px" id="idDay_salesBeginTime" data="-1"></select>
+                            </div>
+                            <input id="salesBeginTime" type="hidden" name="salesBeginTime" class="form-control" placeholder="时间格式:2019-08-08">
+                            <div class="input-group-addon">至</div>
+<!--                            至-->
+                            <div id="dateSelector_salesEndTime">
+                                <select style="height: 30px; width: 100px" id="idYear_salesEndTime" data="-1"></select>
+                                <select style="height: 30px; width: 50px" id="idMonth_salesEndTime" data="-1"></select>
+                                <select style="height: 30px; width: 50px" id="idDay_salesEndTime" data="-1"></select>
+                            </div>
+                            <input id="salesEndTime" type="hidden" name="salesEndTime" class="form-control" placeholder="时间格式:2020-08-08">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-bottom:20px">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">保修期限</div>
+                            <div id="dateSelector_warrantyBeginTime">
+                                <select style="height: 30px; width: 100px" id="idYear_warrantyBeginTime" data="-1"></select>
+                                <select style="height: 30px; width: 50px" id="idMonth_warrantyBeginTime" data="-1"></select>
+                                <select style="height: 30px; width: 50px" id="idDay_warrantyBeginTime" data="-1"></select>
+                            </div>
+                            <input id="warrantyBeginTime" type="hidden" name="warrantyBeginTime" class="form-control" placeholder="时间格式:2019-08-08">
+                            <div class="input-group-addon">至</div>
+                            <div id="dateSelector_warrantyEndTime">
+                                <select style="height: 30px; width: 100px" id="idYear_warrantyEndTime" data="-1"></select>
+                                <select style="height: 30px; width: 50px" id="idMonth_warrantyEndTime" data="-1"></select>
+                                <select style="height: 30px; width: 50px" id="idDay_warrantyEndTime" data="-1"></select>
+                            </div>
+                            <input id="warrantyEndTime" type="hidden" name="warrantyEndTime" class="form-control" placeholder="时间格式:2020-08-08">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:20px">
+                    <div class="form-group">
+                        <input name="distributionChannel" class="form-control" style="display: none;"
+                               id="distributionChannel">
+                        <div class="input-group">
+                            <div class="input-group-addon">销售渠道</div>
+                            <el-select v-model="selectedDistributionChannels" multiple clearable filterable>
+                                <el-option
+                                        v-for="item in allDistributionChannels"
+                                        :key="item"
+                                        :label="item"
+                                        :value="item">
+                                </el-option>
+                            </el-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">顾客姓名</div>
+                            <input name="clientName" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">电话</div>
+                            <input name="phone" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">Email</div>
+                            <input name="email" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">微信</div>
+                            <input name="wechat" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">Facebook</div>
+                            <input name="facebook" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">WhatsApp</div>
+                            <input name="whatsApp" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">QQ</div>
+                            <input name="qq" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">违规销售</div>
+                            <select name="illegalType" class="form-control">
+                                <option value="0" selected="selected">两者包含</option>
+                                <option value="1">是</option>
+                                <option value="2">否</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input type="submit" class="btn btn-success btn-lg btn-block" value="搜索"/>
+                </div>
+            </form>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <button type="button" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#create"
+                        style="margin-top:30px;">新增单条记录
+                </button>
+                <div class="modal fade bs-example-modal-lg" id="create" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                                </button>
+                                <h4 class="modal-title">新增单条记录</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <form id="add" onsubmit="return add('#add')">
+                                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">单号</div>
+                                                    <input name="orderId" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">产品型号</div>
+                                                    <input name="productModel" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">机身码</div>
+                                                    <input name="machineId" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">销售日期</div>
+                                                    <div id="dateSelector_salesTime2">
+                                                        <select style="height: 30px; width: 80px" id="idYear_salesTime2" data="-1"></select>
+                                                        <select style="height: 30px; width: 40px" id="idMonth_salesTime2" data="-1"></select>
+                                                        <select style="height: 30px; width: 40px" id="idDay_salesTime2" data="-1"></select>
+                                                    </div>
+                                                    <input id="salesTime2" type="hidden" name="salesTime2" class="form-control"
+                                                           placeholder="时间格式:2019-08-08">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">保修期限</div>
+                                                    <div id="dateSelector_warrantyTime2">
+                                                        <select style="height: 30px; width: 80px" id="idYear_warrantyTime2" data="-1"></select>
+                                                        <select style="height: 30px; width: 40px" id="idMonth_warrantyTime2" data="-1"></select>
+                                                        <select style="height: 30px; width: 40px" id="idDay_warrantyTime2" data="-1"></select>
+                                                    </div>
+                                                    <input id="warrantyTime2" type="hidden" name="warrantyTime2" class="form-control"
+                                                           placeholder="时间格式:2019-08-08">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                                            <div class="form-group">
+                                                <input name="distributionChannel" class="form-control"
+                                                       style="display: none;" id="distributionChannelForAdd">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">销售渠道</div>
+                                                    <el-select v-model="selectedDistributionChannelsForAdd" clearable
+                                                               filterable allow-create>
+                                                        <el-option
+                                                                v-for="item in allDistributionChannels"
+                                                                :key="item"
+                                                                :label="item"
+                                                                :value="item">
+                                                        </el-option>
+                                                    </el-select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><input type="submit"
+                                                                                                    class="btn btn-success btn-block"
+                                                                                                    value="确认提交"/></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form id="form1" action="" method="post" enctype="multipart/form-data">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input type="file" id="fileData" name="fileData" style="visibility: hidden"
+                           onchange="fileSelected()"/>
+                    <button id="uploadFile" class="btn btn-primary btn-lg btn-block"
+                            onclick="$('#fileData').click();return false;">
+                        批量上传数据
+                    </button>
+                </div>
+            </form>
+
+
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-center">
+                <thead>
+                <tr>
+                    <th class="text-center">单号</th>
+                    <th class="text-center">产品型号</th>
+                    <th class="text-center">机身码</th>
+                    <th class="text-center">销售渠道</th>
+                    <th class="text-center">销售日期</th>
+                    <th class="text-center">保修期限</th>
+                    <th class="text-center">联系方式</th>
+                    <th class="text-center">保修情况</th>
+                    <th class="text-center">违规销售</th>
+                    <th class="text-center">退货</th>
+                    <th class="text-center" colspan="2">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div id="pagingBox" class="box" style="height: 33px;line-height: 30px;text-align: center;font-size: small;"></div>
+        </div>
+    </div>
+    <hr>
+    <p class="text-center text-muted"><a href="http://www.beian.miit.gov.cn" target="_blank">粤ICP备19055771号-2</a></p>
+</div>
+
+<script src="assets/jquery.min.js"></script>
+<script src="assets/bootstrap.min.js"></script>
+<script src="assets/util.js"></script>
+<script src="assets/paging.js"></script>
+<script src="assets/timePicker.js"></script>
+
+<script>
+  $(document).ready(function () {
+    setupDatePicker('dateSelector_salesTime2','idYear_salesTime2','idMonth_salesTime2','idDay_salesTime2','salesTime2')
+    setupDatePicker('dateSelector_warrantyTime2','idYear_warrantyTime2','idMonth_warrantyTime2','idDay_warrantyTime2','warrantyTime2')
+    setupDatePicker('dateSelector_salesEndTime','idYear_salesEndTime','idMonth_salesEndTime','idDay_salesEndTime','salesEndTime')
+    setupDatePicker('dateSelector_salesBeginTime','idYear_salesBeginTime','idMonth_salesBeginTime','idDay_salesBeginTime','salesBeginTime')
+    setupDatePicker('dateSelector_warrantyBeginTime','idYear_warrantyBeginTime','idMonth_warrantyBeginTime','idDay_warrantyBeginTime','warrantyBeginTime')
+    setupDatePicker('dateSelector_warrantyEndTime','idYear_warrantyEndTime','idMonth_warrantyEndTime','idDay_warrantyEndTime','warrantyEndTime')
+  });
+
+  var illegalEnum = {};
+  var warrantyProblemEnum = {};
+  var warrantyResultEnum = {};
+  $.ajaxSettings.async = false;
+
+  $.get('/assets/illegalEnum.js', function (data) {
+    illegalEnum = data;
+  }, "json");
+  $.get('/assets/warrantyProblemEnum.js', function (data) {
+    warrantyProblemEnum = data;
+  }, "json");
+  $.get('/assets/warrantyResultEnum.js', function (data) {
+    warrantyResultEnum = data;
+  }, "json");
+
+  function getAllDistributionChannels() {
+    var allDistributionChannels
+    $.ajax({
+      type: "get",
+      url: "/api/aftersale/getAllDistributionChannel",
+      async: false,
+      cache: false,
+      dataType: "json",
+      success: data => {
+        if (data.code != 0) {
+          alert(data.msg)
+          return
+        }
+
+        allDistributionChannels = data.data
+      }
+    })
+
+    return allDistributionChannels
+  }
+
+  var oldDc = ''
+
+  function distributionChannelForEditOnBlur(this_) {
+    console.log(this_.value)
+    this_.value = this_.value === "" ? oldDc : this_.value
+  }
+
+  function distributionChannelForEditOnFocus(this_, dc) {
+    oldDc = dc
+    this_.value = '';
+    this_.placeholder = dc
+  }
+
+  function setupPagingBox(index,count) {
+    $('#pagingBox').paging({
+      initPageNo: index, // 初始页码
+      totalPages: Math.ceil(count / defaultPageSize), //总页数
+      totalCount: count + '条', // 条目总数
+      slideSpeed: 600, // 缓动速度。单位毫秒
+      jump: true, //是否支持跳转
+      callback: function (page) { // 回调函数
+        if (page !== index) {
+          queryList(defaultPageSize,page)
+        }
+      }
+    })
+  }
+
+  var ignoreFilter = true
+  function queryList(pageSize, pageIndex) {
+    var tbody = $("tbody")
+    tbody.html('<tr><td colspan="12"><h1>查询中...</h1></td></tr>');
+    $.ajax({
+      type: "get", // 数据提交类型
+      url: "/api/aftersale/search?&pageSize=" + pageSize + "&pageIndex=" + (pageIndex - 1) * pageSize + (ignoreFilter ? '' : "&" + $("#search").serialize()), // 发送地址
+      // data: {machineId:machineId}, //发送数据
+      async: true, // 是否异步
+      // processData: false, //processData 默认为false，当设置为true的时候,jquery ajax 提交的时候不会序列化 data，而是直接使用data
+      // contentType: false,
+      cache: false,
+      dataType: "json",
+      success: function (data) {
+        if (data.code != 0) {
+          alert(data.msg)
+          return
+        }
+
+        setupPagingBox(pageIndex,data.data.data === null ? 0 : data.data.count)
+
+        data = data.data.data;
+        if (data === null || data.length === 0) {
+          tbody.html('<tr><td colspan="12"><h1>不存在符合搜索条件的数据</h1></td></tr>');
+          return;
+        } else {
+          tbody.html('');
+        }
+        var datePickersIds = []
+        adcs = getAllDistributionChannels()
+        for (index in data) {
+          item = data[index];
+          tr = '<tr '
+          if (item.illegalType > 0) {
+            tr += ' class="danger"'
+          }
+
+          if (item.refundsDate !== null) {
+            tr += ' style="background-color: #FFFF77"'
+          }
+
+          tr += '>\n' +
+            '              <td>' + item.orderId + '</td>\n' +
+            '              <td>' + item.productModel + '</td>\n' +
+            '              <td>' + item.machineId + '</td>\n' +
+            '              <td>' + item.distributionChannel + '</td>\n' +
+            '              <td>' + Date.parseByFormat('yyyy-MM-dd hh:mm:ss', item.salesTime).format('yyyy-MM-dd') + '</td>\n' +
+            '              <td>' + Date.parseByFormat('yyyy-MM-dd hh:mm:ss', item.warrantyTime).format('yyyy-MM-dd') + '</td>\n' +
+            '              <td>\n' +
+            '                <button type="button" data-toggle="modal" data-target="#' + item.machineId + '-contact">查看</button >\n' +
+            '                <div class="modal fade" id="' + item.machineId + '-contact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\n' +
+            '                  <div class="modal-dialog">\n' +
+            '                    <div class="modal-content">\n' +
+            '                      <div class="modal-header">\n' +
+            '                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n' +
+            '                        <h4 class="modal-title">联系方式</h4>\n' +
+            '                      </div>\n' +
+            '                      <div class="modal-body">\n' +
+            '                        <div class="row">\n' +
+            '                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">\n' +
+            '                            <p>顾客姓名: ' + item.clientName + '</p>\n' +
+            '                            <p>电话: ' + item.phone + '</p>\n' +
+            '                            <p>Email: ' + item.email + '</p>\n' +
+            '                            <p>微信: ' + item.wechat + '</p>\n' +
+            '                            <p>Facebook: ' + item.facebook + '</p>\n' +
+            '                            <p>WhatsApp: ' + item.whatsApp + '</p>\n' +
+            '                            <p>QQ: ' + item.qq + '</p>\n' +
+            '                          </div>\n' +
+            '                        </div>\n' +
+            '                      </div>\n' +
+            '                    </div>\n' +
+            '                  </div>\n' +
+            '                </div>\n' +
+            '              </td>\n' +
+            '              <td>\n' +
+            '                <button type="button" data-toggle="modal" data-target="#' + item.machineId + '-support">查看</button>\n' +
+            '                <div class="modal fade" id="' + item.machineId + '-support" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\n' +
+            '                  <div class="modal-dialog">\n' +
+            '                    <div class="modal-content">\n' +
+            '                      <div class="modal-header">\n' +
+            '                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n' +
+            '                        <h4 class="modal-title">保修情况</h4>\n' +
+            '                      </div>\n' +
+            '                      <div class="modal-body">\n' +
+            '                        <div class="row">\n' +
+            '                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">\n'
+
+
+          for (baoxiuIndex in item.warranty) {
+            isbaoxiu = '';
+            if (Date.parseByFormat('yyyy-MM-dd hh:mm:ss', item.warranty[baoxiuIndex].warrantyDate) < Date.parseByFormat('yyyy-MM-dd hh:mm:ss', item.warrantyTime)) {
+              isbaoxiu = '(保修期内)'
+            } else {
+              isbaoxiu = '(保修期外)'
+            }
+            tr += '                            <p>保修' + (parseInt(baoxiuIndex) + 1) + '日期: ' + Date.parseByFormat('yyyy-MM-dd hh:mm:ss', item.warranty[baoxiuIndex].warrantyDate).format('yyyy-MM-dd') + isbaoxiu + '</p>\n' +
+              '                            <p>保修' + (parseInt(baoxiuIndex) + 1) + '故障问题: ' + warrantyProblemEnum[item.warranty[baoxiuIndex].warrantyProblem] + '</p>\n' +
+              '                            <p>保修' + (parseInt(baoxiuIndex) + 1) + '处理结果: ' + warrantyResultEnum[item.warranty[baoxiuIndex].warrantyResult] + '</p>\n' +
+              '                            <p>保修' + (parseInt(baoxiuIndex) + 1) + '备注: ' + item.warranty[baoxiuIndex].warrantyNote + '</p>\n' +
+              '                            <p>保修' + (parseInt(baoxiuIndex) + 1) + '寄送地址: ' + item.warranty[baoxiuIndex].shippingAddress + '</p>\n'
+          }
+
+          tr +=
+            '                          </div>\n' +
+            '                        </div>\n' +
+            '                      </div>\n' +
+            '                    </div>\n' +
+            '                  </div>\n' +
+            '                </div>\n' +
+            '              </td>\n' +
+
+            // 违规销售
+            '              <td>\n' +
+            '                <button type="button" data-toggle="modal" data-target="#' + item.machineId + '-question">查看</button>\n' +
+            '                <div class="modal fade" id="' + item.machineId + '-question" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\n' +
+            '                  <div class="modal-dialog">\n' +
+            '                    <div class="modal-content">\n' +
+            '                      <div class="modal-header">\n' +
+            '                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n' +
+            '                        <h4 class="modal-title">违规销售</h4>\n' +
+            '                      </div>\n' +
+            '                      <div class="modal-body">\n' +
+            '                        <div class="row">\n' +
+            '                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">\n' +
+            '                            <p>违规销售类型: ' + illegalEnum[item.illegalType] + '</p>\n' +
+            '                            <p>违规销售详情: ' + item.illegalText + '</p>\n' +
+            '                          </div>\n' +
+            '                        </div>\n' +
+            '                      </div>\n' +
+            '                    </div>\n' +
+            '                  </div>\n' +
+            '                </div>\n' +
+            '              </td>\n' +
+
+            // 退货
+            '              <td>\n' +
+            '                <button type="button" data-toggle="modal" data-target="#' + item.machineId + '-refunds">查看</button>\n' +
+            '                <div class="modal fade" id="' + item.machineId + '-refunds" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\n' +
+            '                  <div class="modal-dialog">\n' +
+            '                    <div class="modal-content">\n' +
+            '                      <div class="modal-header">\n' +
+            '                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n' +
+            '                        <h4 class="modal-title">退货</h4>\n' +
+            '                      </div>\n' +
+            '                      <div class="modal-body">\n' +
+            '                        <div class="row">\n' +
+            '                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">\n' +
+            '                            <p>退货日期: ' + (item.refundsDate != null ? Date.parseByFormat('yyyy-MM-dd hh:mm:ss', item.refundsDate).format('yyyy-MM-dd') : '') + '</p>\n' +
+            '                            <p>退货原因: ' + item.refundsReason + '</p>\n' +
+            '                          </div>\n' +
+            '                        </div>\n' +
+            '                      </div>\n' +
+            '                    </div>\n' +
+            '                  </div>\n' +
+            '                </div>\n' +
+            '              </td>\n' +
+            '              <td>\n'
+
+          if (item.refundsDate == null) {
+            tr += '                <button type="button" data-toggle="modal" data-target="#' + item.machineId + '-edit">编辑</button>\n'
+          }
+          tr += '                <div class="modal fade bs-example-modal-lg" id="' + item.machineId + '-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\n' +
+            '                  <div class="modal-dialog modal-lg">\n' +
+            '                    <div class="modal-content">\n' +
+            '                      <div class="modal-header">\n' +
+            '                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n' +
+            '                        <h4 class="modal-title">编辑界面</h4>\n' +
+            '                      </div>\n' +
+            '                      <div class="modal-body">\n' +
+            '                        <div class="row">\n' +
+            '<form id="' + item.machineId + '" onsubmit="return edit(' + '\'#' + item.machineId + '\'' + ')">' +
+            '                          <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div class="input-group">\n' +
+            '                                <div class="input-group-addon">单号</div>\n' +
+            '                                <input type="hidden"  name="afertSaleId"  value="' + item.afertSaleId + '" >\n' +
+            '                                <input class="form-control"  readonly="readonly"  name="orderId"  value="' + item.orderId + '" placeholder="">\n' +
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n' +
+            '                          <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div class="input-group">\n' +
+            '                                <div class="input-group-addon">产品型号</div>\n' +
+            '                                <input class="form-control" readonly="readonly"  name="productModel"  value="' + item.productModel + '" placeholder="">\n' +
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n' +
+            '                          <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div class="input-group">\n' +
+            '                                <div class="input-group-addon">机身码</div>\n' +
+            '                                <input class="form-control" readonly="readonly"  name="machineId"  value="' + item.machineId + '" placeholder="">\n' +
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n' +
+            '                          <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div class="input-group">\n' +
+            '                                <div class="input-group-addon">销售日期</div>\n' +
+            '                                <input class="form-control" readonly="readonly"  name="salesTime2"  value="' + Date.parseByFormat('yyyy-MM-dd hh:mm:ss', item.salesTime).format('yyyy-MM-dd') + '" placeholder="">\n'+
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n' +
+            '                          <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div class="input-group">\n' +
+            '                                <div class="input-group-addon">保修期限</div>\n' +
+            '                                <input class="form-control" readonly="readonly"  name="warrantyTime2"  value="' + Date.parseByFormat('yyyy-MM-dd hh:mm:ss', item.warrantyTime).format('yyyy-MM-dd') + '" placeholder="">\n' +
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n' +
+            '                          <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div class="input-group">\n' +
+            '                                <div class="input-group-addon">销售渠道</div>\n' +
+            '                                <input autocomplete="off" list="list' + index + '" onfocus="distributionChannelForEditOnFocus(this,\'' + item.distributionChannel + '\')"' +
+            '                                       onblur="distributionChannelForEditOnBlur(this)"' +
+            '                                       name="distributionChannel" class="form-control" value="' + item.distributionChannel + '" placeholder="">\n' +
+            '                                  <datalist id="list' + index + '">'
+
+          for (indexAdcs in adcs) {
+            tr += '<option value="' + adcs[indexAdcs] + '">'
+          }
+
+          tr += '                            </datalist>' +
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n' +
+            '                          <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div class="input-group">\n' +
+            '                                <div class="input-group-addon">顾客姓名</div>\n' +
+            '                                <input class="form-control" name="clientName"  value="' + item.clientName + '" placeholder="" value="' + item.clientName + '">\n' +
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n' +
+            '                          <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div class="input-group">\n' +
+            '                                <div class="input-group-addon">电话</div>\n' +
+            '                                <input class="form-control" name="phone"  value="' + item.phone + '" placeholder="">\n' +
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n' +
+            '                          <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div class="input-group">\n' +
+            '                                <div class="input-group-addon">Email</div>\n' +
+            '                                <input class="form-control" name="email"  value="' + item.email + '" placeholder="">\n' +
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n' +
+            '                          <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div class="input-group">\n' +
+            '                                <div class="input-group-addon">微信</div>\n' +
+            '                                <input class="form-control" name="wechat"  value="' + item.wechat + '" placeholder="">\n' +
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n' +
+            '                          <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div class="input-group">\n' +
+            '                                <div class="input-group-addon">Facebook</div>\n' +
+            '                                <input class="form-control" name="facebook"  value="' + item.facebook + '" placeholder="">\n' +
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n' +
+            '                          <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div class="input-group">\n' +
+            '                                <div class="input-group-addon">WhatsApp</div>\n' +
+            '                                <input class="form-control" name="whatsApp"  value="' + item.whatsApp + '" placeholder="">\n' +
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n' +
+            '                          <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div class="input-group">\n' +
+            '                                <div class="input-group-addon">QQ</div>\n' +
+            '                                <input class="form-control" name="qq"  value="' + item.qq + '" placeholder="">\n' +
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n'
+
+          var baoxiuIndex2 = 0;
+          for (baoxiuIndex in item.warranty) {
+            baoxiuIndex2++;
+            tr += '                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:20px">\n' +
+              '                            <div class="form-group">\n' +
+              '                              <div style="text-align: start"  class="input-group">\n' +
+              '                                <div class="input-group-addon">保修' + (baoxiuIndex2) + '日期</div>\n' +
+              '<div id="dateSelector_warrantyDate2_'+index+'_'+baoxiuIndex2+'">'+
+              '      <select style="height: 30px" id="idYear_warrantyDate2_'+index+'_'+baoxiuIndex2+'" data="'+Date.parseByFormat('yyyy-MM-dd hh:mm:ss', item.warranty[baoxiuIndex].warrantyDate).getFullYear()+'"></select>'+
+              '      <select style="height: 30px" id="idMonth_warrantyDate2_'+index+'_'+baoxiuIndex2+'" data="'+(Date.parseByFormat('yyyy-MM-dd hh:mm:ss', item.warranty[baoxiuIndex].warrantyDate).getMonth()+1)+'"></select>'+
+              '      <select style="height: 30px" id="idDay_warrantyDate2_'+index+'_'+baoxiuIndex2+'" data="'+Date.parseByFormat('yyyy-MM-dd hh:mm:ss', item.warranty[baoxiuIndex].warrantyDate).getDate()+'"></select>'+
+              '</div>      '+
+              '                                <input id="warrantyDate2_'+index+'_'+baoxiuIndex2+'" type="hidden" class="form-control" name="warranty.' + baoxiuIndex + '.warrantyDate2"  value="' + Date.parseByFormat('yyyy-MM-dd hh:mm:ss', item.warranty[baoxiuIndex].warrantyDate).format('yyyy-MM-dd') + '" placeholder="时间格式:2019-08-08">\n'
+            datePickersIds.push('warrantyDate2_'+index+'_'+baoxiuIndex2)
+
+            tr += '                              </div>\n' +
+              '                            </div>\n' +
+              '                          </div>\n' +
+              '                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:20px">\n' +
+              '                            <div class="form-group">\n' +
+              '                              <div class="input-group">\n' +
+              '                                <div class="input-group-addon">保修' + (baoxiuIndex2) + '故障问题</div>\n' +
+              '                                <select name="warranty.' + baoxiuIndex + '.warrantyProblem"  class="form-control">\n'
+
+            for (warrantyProblemEnumIndex in warrantyProblemEnum) {
+              tr += '<option '
+              if (item.warranty[baoxiuIndex].warrantyProblem == warrantyProblemEnumIndex) {
+                tr += 'selected="selected"'
+              }
+              tr += ' value="' + warrantyProblemEnumIndex + '">' + warrantyProblemEnum[warrantyProblemEnumIndex] + '</option>'
+            }
+
+            tr += '                                </select>\n' +
+              '                              </div>\n' +
+              '                            </div>\n' +
+              '                          </div>\n' +
+              '                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:20px">\n' +
+              '                            <div class="form-group">\n' +
+              '                              <div class="input-group">\n' +
+              '                                <div class="input-group-addon">保修' + (baoxiuIndex2) + '处理结果</div>\n' +
+              '                                <select name="warranty.' + baoxiuIndex + '.warrantyResult" class="form-control">\n'
+
+            for (warrantyResultEnumIndex in warrantyResultEnum) {
+              tr += '<option '
+              if (item.warranty[baoxiuIndex].warrantyResult == warrantyResultEnumIndex) {
+                tr += 'selected="selected"'
+              }
+              tr += ' value="' + warrantyResultEnumIndex + '">' + warrantyResultEnum[warrantyResultEnumIndex] + '</option>'
+            }
+
+            tr += '                                </select>\n' +
+              '                              </div>\n' +
+              '                            </div>\n' +
+              '                          </div>\n' +
+              '                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:20px">\n' +
+              '                            <div class="form-group">\n' +
+              '                              <div class="input-group">\n' +
+              '                                <div class="input-group-addon">保修' + (baoxiuIndex2) + '备注</div>\n' +
+              '                                <input class="form-control" name="warranty.' + baoxiuIndex + '.warrantyNote" value="' + item.warranty[baoxiuIndex].warrantyNote + '" placeholder="">\n' +
+              '                              </div>\n' +
+              '                            </div>\n' +
+              '                          </div>\n' +
+              '                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:20px">\n' +
+              '                            <div class="form-group">\n' +
+              '                              <div class="input-group">\n' +
+              '                                <div class="input-group-addon">寄送地址' + (baoxiuIndex2) + '</div>\n' +
+              '                                <input class="form-control" name="warranty.' + baoxiuIndex + '.shippingAddress" value="' + item.warranty[baoxiuIndex].shippingAddress + '" placeholder="">\n' +
+              '                              </div>\n' +
+              '                            </div>\n' +
+              '                          </div>\n'
+
+
+          }
+
+          for (i = 0; i < 2; i++) {
+            baoxiuIndex2++;
+            tr += '                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:20px">\n' +
+              '                            <div class="form-group">\n' +
+              '                              <div style="text-align: start" class="input-group">\n' +
+              '                                <div class="input-group-addon">保修' + (baoxiuIndex2) + '日期</div>\n' +
+              '<div id="dateSelector_warrantyDate2_'+index+'_'+baoxiuIndex2+'">'+
+              '      <select style="height: 30px" id="idYear_warrantyDate2_'+index+'_'+baoxiuIndex2+'" data="-1"></select>'+
+              '      <select style="height: 30px" id="idMonth_warrantyDate2_'+index+'_'+baoxiuIndex2+'" data="-1"></select>'+
+              '      <select style="height: 30px" id="idDay_warrantyDate2_'+index+'_'+baoxiuIndex2+'" data="-1"></select>'+
+              '</div>      '+
+              '                                <input id="warrantyDate2_'+index+'_'+baoxiuIndex2+'" type="hidden" class="form-control" name="warranty.' + (parseInt(baoxiuIndex2) - 1) + '.warrantyDate2"  value="" placeholder="时间格式:2019-08-08">\n'
+            datePickersIds.push('warrantyDate2_'+index+'_'+baoxiuIndex2)
+
+            tr +='                              </div>\n' +
+              '                            </div>\n' +
+              '                          </div>\n' +
+              '                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:20px">\n' +
+              '                            <div class="form-group">\n' +
+              '                              <div class="input-group">\n' +
+              '                                <div class="input-group-addon">保修' + (baoxiuIndex2) + '故障问题</div>\n' +
+              '                                <select name="warranty.' + (parseInt(baoxiuIndex2) - 1) + '.warrantyProblem"  class="form-control">\n'
+
+            for (warrantyProblemEnumIndex in warrantyProblemEnum) {
+              tr += '<option '
+              if (0 == warrantyProblemEnumIndex) {
+                tr += 'selected="selected"'
+              }
+              tr += ' value="' + warrantyProblemEnumIndex + '">' + warrantyProblemEnum[warrantyProblemEnumIndex] + '</option>'
+            }
+
+            tr += '                                </select>\n' +
+              '                              </div>\n' +
+              '                            </div>\n' +
+              '                          </div>\n' +
+              '                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:20px">\n' +
+              '                            <div class="form-group">\n' +
+              '                              <div class="input-group">\n' +
+              '                                <div class="input-group-addon">保修' + (baoxiuIndex2) + '处理结果</div>\n' +
+              '                                <select name="warranty.' + (parseInt(baoxiuIndex2) - 1) + '.warrantyResult" class="form-control">\n'
+
+            for (warrantyResultEnumIndex in warrantyResultEnum) {
+              tr += '<option '
+              if (0 == warrantyResultEnumIndex) {
+                tr += 'selected="selected"'
+              }
+              tr += ' value="' + warrantyResultEnumIndex + '">' + warrantyResultEnum[warrantyResultEnumIndex] + '</option>'
+            }
+
+            tr += '                                </select>\n' +
+              '                              </div>\n' +
+              '                            </div>\n' +
+              '                          </div>\n' +
+              '                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:20px">\n' +
+              '                            <div class="form-group">\n' +
+              '                              <div class="input-group">\n' +
+              '                                <div class="input-group-addon">保修' + (baoxiuIndex2) + '备注</div>\n' +
+              '                                <input class="form-control" name="warranty.' + (parseInt(baoxiuIndex2) - 1) + '.warrantyNote" value="" placeholder="">\n' +
+              '                              </div>\n' +
+              '                            </div>\n' +
+              '                          </div>\n' +
+              '                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:20px">\n' +
+              '                            <div class="form-group">\n' +
+              '                              <div class="input-group">\n' +
+              '                                <div class="input-group-addon">寄送地址' + (baoxiuIndex2) + '</div>\n' +
+              '                                <input class="form-control" name="warranty.' + (parseInt(baoxiuIndex2) - 1) + '.shippingAddress" value="" placeholder="">\n' +
+              '                              </div>\n' +
+              '                            </div>\n' +
+              '                          </div>\n'
+
+          }
+
+          // 违规销售
+          tr += '                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div class="input-group">\n' +
+            '                                <div class="input-group-addon">违规销售类型</div>\n' +
+            '                                <select name="illegalType" class="form-control">\n'
+          for (illegalEnumIndex in illegalEnum) {
+            tr += '<option '
+            if (item.illegalType == illegalEnumIndex) {
+              tr += 'selected="selected"'
+            }
+            tr += ' value="' + illegalEnumIndex + '">' + illegalEnum[illegalEnumIndex] + '</option>'
+          }
+          tr += '                                </select>\n' +
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n' +
+            '                          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div class="input-group">\n' +
+            '                                <div class="input-group-addon">违规销售详情</div>\n' +
+            '                                <input class="form-control" name="illegalText" value="' + item.illegalText + '" placeholder="">\n' +
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n'
+
+          // 退货
+          tr += '                       <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div style="text-align: start"  class="input-group">\n' +
+            '                                <div class="input-group-addon">退货日期</div>\n' +
+            '<div id="dateSelector_refundsDate2_'+index+'">'+
+            '      <select style="height: 30px" id="idYear_refundsDate2_'+index+'" data="'+(item.refundsDate != null ? Date.parseByFormat('yyyy-MM-dd hh:mm:ss', item.refundsDate).getFullYear() : -1)+'"></select>'+
+            '      <select style="height: 30px" id="idMonth_refundsDate2_'+index+'" data="'+(item.refundsDate != null ? Date.parseByFormat('yyyy-MM-dd hh:mm:ss', item.refundsDate).getMonth()+1 : -1)+'"></select>'+
+            '      <select style="height: 30px" id="idDay_refundsDate2_'+index+'" data="'+(item.refundsDate != null ? Date.parseByFormat('yyyy-MM-dd hh:mm:ss', item.refundsDate).getDate() : -1)+'"></select>'+
+            '</div>      '+
+            '                                <input type="hidden" id="refundsDate2_'+index+'" name="refundsDate2" class="form-control" value="' + (item.refundsDate != null ? Date.parseByFormat('yyyy-MM-dd hh:mm:ss', item.refundsDate).format('yyyy-MM-dd') : '') + '" placeholder="时间格式:2019-08-08">\n'
+          datePickersIds.push('refundsDate2_'+index)
+
+          tr +='                                </input>\n' +
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n' +
+            '                          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="margin-bottom:20px">\n' +
+            '                            <div class="form-group">\n' +
+            '                              <div class="input-group">\n' +
+            '                                <div class="input-group-addon">退货原因</div>\n' +
+            '                                <input class="form-control" name="refundsReason" value="' + item.refundsReason + '" placeholder="">\n' +
+            '                              </div>\n' +
+            '                            </div>\n' +
+            '                          </div>\n'
+
+
+          tr += '                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><input type="submit" value="确认提交" class="btn btn-success btn-block"></input></div>\n' +
+            '</form>' +
+            '                        </div>\n' +
+            '                      </div>\n' +
+            '                    </div>\n' +
+            '                  </div>\n' +
+            '                </div>\n' +
+            '              </td>\n' +
+            '            </tr>'
+
+
+          $("tbody").append(tr)
+        }
+
+        for (var id of datePickersIds) {
+          setupDatePicker('dateSelector_'+id,'idYear_'+id,'idMonth_'+id,'idDay_'+id,id)
+        }
+      },
+      error: function (XMLHttpRequest, data2, data3) {
+        if (XMLHttpRequest.status != 200) {
+          alert("服务器出错")
+          return
+        }
+        alert(data2)
+        alert(data3)
+      },
+    });
+
+  }
+
+  function search(dom) {
+
+    if (dom == "#search") {
+      if ($('#salesBeginTime').val() !== '' && $('#salesEndTime').val() !== '') {
+        var beginD = Date.parseByFormat('yyyy-MM-dd', $('#salesBeginTime').val())
+        var endD = Date.parseByFormat('yyyy-MM-dd', $('#salesEndTime').val())
+        if (endD < beginD) {
+          alert("销售日期错误")
+          return false
+        }
+      }
+      if ($('#warrantyBeginTime').val() !== '' && $('#warrantyEndTime').val() !== '') {
+        var beginD = Date.parseByFormat('yyyy-MM-dd', $('#warrantyBeginTime').val())
+        var endD = Date.parseByFormat('yyyy-MM-dd', $('#warrantyEndTime').val())
+        if (endD < beginD) {
+          alert("保修期限错误")
+          return false
+        }
+      }
+
+      ignoreFilter = false
+      dataArray = $(dom).serializeArray();
+      if (dataArray.length > 0) {
+        isE = false
+        for (i in dataArray) {
+          if (dataArray[i].value != "") {
+            if (dataArray[i].name == "illegalType" && dataArray[i].value == 0) {
+              continue
+            }
+            isE = true
+            break
+          }
+        }
+        if (!isE) {
+          alert("请填写筛选搜索条件")
+          return false
+        }
+      } else {
+        alert("请填写筛选搜索条件")
+        return false
+      }
+    } else {
+      ignoreFilter = true
+    }
+
+    queryList(defaultPageSize,1)
+    return false
+  }
+
+  function edit(dom) {
+
+    $.ajax({
+      type: "put", // 数据提交类型
+      url: "/api/aftersale/modByUser", // 发送地址
+      data: $(dom).serialize(),
+      async: false, // 是否异步
+      // processData: false, //processData 默认为false，当设置为true的时候,jquery ajax 提交的时候不会序列化 data，而是直接使用data
+      // contentType: false,
+      cache: false,
+      dataType: "json",
+      success: function (data) {
+        console.log(data)
+        if (data.code != 0) {
+          alert(data.msg)
+          return false
+        }
+
+        alert("提交成功")
+        location.reload()
+      },
+      error: function (XMLHttpRequest, data2, data3) {
+        if (XMLHttpRequest.status != 200) {
+          alert("服务器出错")
+          return false
+        }
+        alert(data2)
+        alert(data3)
+      },
+    });
+
+    return false
+
+    // },false);
+  }
+
+  function add(dom) {
+
+    $.ajax({
+      type: "post", // 数据提交类型
+      url: "/api/aftersale/add", // 发送地址
+      async: false, // 是否异步
+      data: $(dom).serialize(),
+      // processData: false, //processData 默认为false，当设置为true的时候,jquery ajax 提交的时候不会序列化 data，而是直接使用data
+      // contentType: false,
+      cache: false,
+      dataType: "json",
+      success: function (data) {
+        console.log(data)
+        if (data.code != 0) {
+          alert(data.msg)
+          return false
+        }
+
+        alert("提交成功")
+
+        location.reload()
+
+      },
+      error: function (XMLHttpRequest, data2, data3) {
+        if (XMLHttpRequest.status != 200) {
+          alert("服务器出错")
+          return false
+        }
+        alert(data2)
+        alert(data3)
+      },
+    });
+
+    return false
+
+    // },false);
+  }
+
+  function fileSelected() {
+    // 文件选择后触发次函数
+    console.log("1111")
+    var formData = new FormData();
+    formData.append("data", document.getElementById("fileData").files[0]);
+    $.ajax({
+      type: "POST", // 数据提交类型
+      url: "/api/aftersale/upload", // 发送地址
+      data: formData, //发送数据
+      async: false, // 是否异步
+      processData: false, //processData 默认为false，当设置为true的时候,jquery ajax 提交的时候不会序列化 data，而是直接使用data
+      contentType: false,
+      cache: false,
+      dataType: "json",
+      success: function (data) {
+        $('#fileData').val(''); // erase the value of input for reload
+
+        console.log(data)
+        if (data.code != 0) {
+          alert(data.msg)
+          return
+        }
+        alert("上传成功");
+        location.reload()
+        return
+      },
+      error: function (XMLHttpRequest, data2, data3) {
+        $('#fileData').val(''); // erase the value of input for reload
+
+        if (XMLHttpRequest.status != 200) {
+          alert("服务器出错")
+          return
+        }
+        alert(data2)
+        alert(data3)
+      },
+    });
+  }
+</script>
+
+</body>
+
+<!-- import Vue before Element -->
+<script src="assets/vue.js"></script>
+<!-- import JavaScript -->
+<script src="assets/vue-index.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: function () {
+      return {
+        selectedDistributionChannels: [],
+        selectedDistributionChannelsForAdd: '',
+
+        allDistributionChannels: []
+      }
+    },
+    created: function () {
+      // init allDistributionChannels
+      this.allDistributionChannels = getAllDistributionChannels()
+    },
+    watch: {
+      selectedDistributionChannels: function (newS, oldS) {
+        document.getElementById("distributionChannel").value = newS.join(',')
+        console.log(document.getElementById("distributionChannel").value)
+      },
+      selectedDistributionChannelsForAdd: function (newS, oldS) {
+        document.getElementById("distributionChannelForAdd").value = newS
+      }
+    }
+  })
+</script>
+</html>

@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>统计分析</title>
+    <meta name="applicable-device" content="pc,mobile">
+    <link rel="apple-touch-icon" href="https://www.rayson.com.cn/images/assets/rayson-icon.jpg">
+    <meta name="apple-mobile-web-app-title" content="统计分析">
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/element-ui-index.css">
+    <script type="text/javascript">
+      var userAgent = navigator.userAgent;
+      if (userAgent.indexOf("Chrome") < 1 && userAgent.indexOf("Safari") < 1)
+        window.location = "https://www.baidu.com";
+    </script>
+  </head>
+<body>
+<div id="app">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <span class="navbar-brand">统计分析</span>
+            </div>
+        </div>
+    </nav>
+    <div style="margin-top:90px"></div>
+    <div class="container">
+        <div class="row" style="margin-bottom:30px">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-bottom:20px">
+                <form id="distributionChannel" onsubmit="return distributionChannelInfo('#distributionChannel')">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">销售日期</div>
+                            <div id="dateSelector_salesBeginTime">
+                                <select style="height: 30px" id="idYear_salesBeginTime" data="-1"></select>
+                                <select style="height: 30px" id="idMonth_salesBeginTime" data="-1"></select>
+                                <select style="height: 30px" id="idDay_salesBeginTime" data="-1"></select>
+                            </div>
+                            <input id="salesBeginTime" type="hidden" name="salesBeginTime" class="form-control">
+                            <div class="input-group-addon">至</div>
+                            <div id="dateSelector_salesEndTime">
+                                <select style="height: 30px" id="idYear_salesEndTime" data="-1"></select>
+                                <select style="height: 30px" id="idMonth_salesEndTime" data="-1"></select>
+                                <select style="height: 30px" id="idDay_salesEndTime" data="-1"></select>
+                            </div>
+                            <input id="salesEndTime" type="hidden" name="salesEndTime" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input name="distributionChannel" class="form-control" style="display: none;"
+                               id="distributionChannelInput">
+                        <div class="input-group">
+                            <div class="input-group-addon">销售渠道</div>
+                            <el-select v-model="selectedDistributionChannel" clearable filterable>
+                                <el-option
+                                        v-for="item in allDistributionChannels"
+                                        :key="item"
+                                        :label="item"
+                                        :value="item">
+                                </el-option>
+                            </el-select>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-success btn-lg btn-block" value="查询销售渠道情况"/>
+                </form>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-bottom:20px">
+                <form id="productModelInfo" onsubmit="return productModelInfo('#productModelInfo')">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">销售日期</div>
+                            <div id="dateSelector_salesBeginTime2">
+                                <select style="height: 30px" id="idYear_salesBeginTime2" data="-1"></select>
+                                <select style="height: 30px" id="idMonth_salesBeginTime2" data="-1"></select>
+                                <select style="height: 30px" id="idDay_salesBeginTime2" data="-1"></select>
+                            </div>
+                            <input id="salesBeginTime2" type="hidden" name="salesBeginTime" class="form-control">
+                            <div class="input-group-addon">至</div>
+                            <div id="dateSelector_salesEndTime2">
+                                <select style="height: 30px" id="idYear_salesEndTime2" data="-1"></select>
+                                <select style="height: 30px" id="idMonth_salesEndTime2" data="-1"></select>
+                                <select style="height: 30px" id="idDay_salesEndTime2" data="-1"></select>
+                            </div>
+                            <input id="salesEndTime2" type="hidden" name="salesEndTime" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">产品型号</div>
+                            <input name="productModel" class="form-control">
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-warning btn-lg btn-block" value="查询产品情况"/>
+                </form>
+            </div>
+        </div>
+        <div id="resultDiv" class="text-center">
+        </div>
+    </div>
+    <hr>
+    <p class="text-center text-muted"><a href="http://www.beian.miit.gov.cn" target="_blank">粤ICP备19055771号-2</a></p>
+</div>
+</body>
+
+<script src="assets/jquery.min.js"></script>
+<script src="assets/bootstrap.min.js"></script>
+<script src="assets/util.js"></script>
+<script src="assets/timePicker.js"></script>
+
+<script>
+  $(document).ready(function () {
+    setupDatePicker('dateSelector_salesEndTime','idYear_salesEndTime','idMonth_salesEndTime','idDay_salesEndTime','salesEndTime')
+    setupDatePicker('dateSelector_salesEndTime2','idYear_salesEndTime2','idMonth_salesEndTime2','idDay_salesEndTime2','salesEndTime2')
+    setupDatePicker('dateSelector_salesBeginTime','idYear_salesBeginTime','idMonth_salesBeginTime','idDay_salesBeginTime','salesBeginTime')
+    setupDatePicker('dateSelector_salesBeginTime2','idYear_salesBeginTime2','idMonth_salesBeginTime2','idDay_salesBeginTime2','salesBeginTime2')
+  });
+
+  var illegalEnum = {};
+  var warrantyProblemEnum = {};
+  $.ajaxSettings.async = false;
+
+  $.get('/assets/illegalEnum.js', function (data) {
+    illegalEnum = data;
+  }, "json");
+  $.get('/assets/warrantyProblemEnum.js', function (data) {
+    warrantyProblemEnum = data;
+  }, "json");
+
+  function productModelInfo(dom) {
+    $.ajax({
+      type: "get", // 数据提交类型
+      url: "/api/aftersale/getByProductModelInfo?" + $(dom).serialize(), // 发送地址
+      async: false, // 是否异步
+      // processData: false, //processData 默认为false，当设置为true的时候,jquery ajax 提交的时候不会序列化 data，而是直接使用data
+      // contentType: false,
+      cache: false,
+      dataType: "json",
+      success: function (data) {
+        console.log(data)
+        if (data.code != 0) {
+          alert(data.msg)
+          return false
+        }
+        data = data.data
+
+        var pInfo = "<h4><b>产品情况</b></h4>\n" +
+          "        <p>销售日期: " + data.startTime + "至" + data.endTime + "</p>\n" +
+          "        <p>产品型号: " + data.productModel + "</p>\n" +
+          "        <p>销售数量: " + data.salesCount + "</p>\n" +
+          "        <p>故障总次数: " + data.faultCount + "次</p>\n" +
+          "        <p>故障率: " + data.faultPercentage + "%</p>\n"
+
+        for (warrantyIndex in data.warranty) {
+          var warrantyProblem = data.warranty[warrantyIndex];
+          if (warrantyProblemEnum[warrantyProblem.warrantyProblem]) {
+            pInfo += '<p>' + warrantyProblemEnum[warrantyProblem.warrantyProblem] + ': ' + warrantyProblem.count + '次</p>'
+          } else {
+            pInfo += '<p>保修原因代码' + warrantyProblem.warrantyProblem + ': ' + warrantyProblem.count + '次</p>'
+          }
+        }
+
+
+        $("#resultDiv").html(pInfo)
+
+        // alert("提交成功")
+
+      },
+      error: function (XMLHttpRequest, data2, data3) {
+        if (XMLHttpRequest.status != 200) {
+          alert("服务器出错")
+          return false
+        }
+        alert(data2)
+        alert(data3)
+      },
+    });
+    return false
+  }
+
+  function distributionChannelInfo(dom) {
+    $.ajax({
+      type: "get", // 数据提交类型
+      url: "/api/aftersale/getByDistributionChannelInfo?" + $(dom).serialize(), // 发送地址
+      async: false, // 是否异步
+      // processData: false, //processData 默认为false，当设置为true的时候,jquery ajax 提交的时候不会序列化 data，而是直接使用data
+      // contentType: false,
+      cache: false,
+      dataType: "json",
+      success: function (data) {
+        console.log(data)
+        if (data.code != 0) {
+          alert(data.msg)
+          return false
+        }
+
+        data = data.data
+
+        console.log(data)
+
+        var pInfo = '        <h4><b>销售渠道情况</b></h4>\n' +
+          '        <p>销售日期: ' + data.startTime + '至' + data.endTime + '</p>\n' +
+          '        <p>销售渠道: ' + data.distributionChannel + '</p>\n' +
+          '        <p>违规销售: ' + data.illegalCount + '次 <button type="button" data-toggle="modal" data-target="#qudao">查看</button></p>\n' +
+          '        <div class="modal fade" id="qudao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\n' +
+          '          <div class="modal-dialog">\n' +
+          '          \t<div class="modal-content">\n' +
+          '          \t  <div class="modal-header">\n' +
+          '                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n' +
+          '                <h4 class="modal-title">违规销售</h4>\n' +
+          '              </div>\n' +
+          '              <div class="modal-body">\n' +
+          '                <div class="row">\n' +
+          '                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">\n'
+        for (afterSalesIndex in data.afterSales.data) {
+          var sale = data.afterSales.data[afterSalesIndex];
+          if (sale.illegalType > 0) {
+            pInfo += '<p>单号: ' + sale.afertSaleId + '</p>'
+          }
+        }
+        pInfo += '                  </div>\n' +
+          '                </div>\n' +
+          '              </div>\n' +
+          '            </div>\n' +
+          '          </div>\n' +
+          '        </div>\n' +
+          '        <p>工厂处理产品保修:  ' + data.warrantyCount + '次 <button type="button" data-toggle="modal" data-target="#baoxiu">查看</button></p>\n' +
+          '        <div class="modal fade" id="baoxiu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\n' +
+          '          <div class="modal-dialog">\n' +
+          '          \t<div class="modal-content">\n' +
+          '          \t  <div class="modal-header">\n' +
+          '                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n' +
+          '                <h4 class="modal-title">产品保修</h4>\n' +
+          '              </div>\n' +
+          '              <div class="modal-body">\n' +
+          '                <div class="row">\n' +
+          '                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">\n'
+        '                    <p>故障问题: 不能开机(保修期内)</p>\n'
+        '                    <p>故障问题: 不能开机(保修期外)</p>\n'
+        for (afterSalesIndex in data.afterSales.data) {
+          var sale = data.afterSales.data[afterSalesIndex];
+
+          for (warrantyIndex in sale.warranty) {
+            warranty = sale.warranty[warrantyIndex]
+            isWarrantyTime = '(保修期外)'
+            if (Date.parseByFormat('yyyy-MM-dd hh:mm:ss', warranty.warrantyDate) < Date.parseByFormat('yyyy-MM-dd hh:mm:ss', sale.warrantyTime)) {
+              isWarrantyTime = '(保修期内)'
+            }
+            if (warrantyProblemEnum[warranty.warrantyProblem]) {
+              pInfo += '<p>故障问题: ' + warrantyProblemEnum[warranty.warrantyProblem] + isWarrantyTime + '</p>'
+            } else {
+              pInfo += '<p>故障问题: 故障代码' + warranty.warrantyProblem + isWarrantyTime + '</p>'
+            }
+          }
+
+
+        }
+        pInfo += '                  </div>\n' +
+          '                </div>\n' +
+          '              </div>\n' +
+          '            </div>\n' +
+          '          </div>\n' +
+          '        </div>'
+
+
+        $("#resultDiv").html(pInfo)
+
+        return false
+
+        // alert("提交成功")
+
+      },
+      error: function (XMLHttpRequest, data2, data3) {
+        if (XMLHttpRequest.status != 200) {
+          alert("服务器出错")
+          return false
+        }
+        alert(data2)
+        alert(data3)
+      },
+    });
+    return false
+  }
+
+</script>
+
+<!-- import Vue before Element -->
+<script src="assets/vue.js"></script>
+<!-- import JavaScript -->
+<script src="assets/vue-index.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: function () {
+      return {
+        selectedDistributionChannel: '',
+        allDistributionChannels: []
+      }
+    },
+    created: function () {
+      // init allDistributionChannels
+      // init allDistributionChannels
+      $.ajax({
+        type: "get",
+        url: "/api/aftersale/getAllDistributionChannel",
+        async: false,
+        cache: false,
+        dataType: "json",
+        success: data => {
+          if (data.code != 0) {
+            alert(data.msg)
+            return
+          }
+
+          this.allDistributionChannels = data.data
+        }
+      })
+    },
+    watch: {
+      selectedDistributionChannel: function (newS, oldS) {
+        document.getElementById("distributionChannelInput").value = newS
+        console.log(document.getElementById("distributionChannelInput").value)
+      }
+    }
+  })
+</script>
+
+</html>

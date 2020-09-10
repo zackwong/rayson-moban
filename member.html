@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>员工管理</title>
+    <meta name="applicable-device" content="pc,mobile">
+    <link rel="apple-touch-icon" href="https://www.rayson.com.cn/images/assets/rayson-icon.jpg">
+    <meta name="apple-mobile-web-app-title" content="超级管理员">
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript">
+      var userAgent = navigator.userAgent;
+      if (userAgent.indexOf("Chrome") < 1 && userAgent.indexOf("Safari") < 1)
+        window.location = "https://www.baidu.com";
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">导航</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="navbar-brand">超级管理员</span>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="roger.html">超级管理员</a></li>
+            <li><a href="anlytics.html" target="_blank">统计分析</a></li>
+            <li><a href="cangguan.html" target="_blank">仓管</a></li>
+            <li><a href="search.html" target="_blank">机身码查询</a></li>
+            <li><a href="member.html" target="_blank">统计分析</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div style="margin-top:60px"></div>
+    <div class="container">
+      <div class="row" style="margin-bottom:30px">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target=".bs-example-modal-lg" style="margin-top:30px;">新增员工账号</button>
+          <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">新增员工账号</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                      <div class="form-group">
+                        <div class="input-group">
+                                                    <div class="input-group-addon">单号</div>
+                                                    <input name="orderId" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">产品型号</div>
+                                                    <input name="productModel" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">机身码</div>
+                                                    <input name="machineId" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">销售日期</div>
+                                                    <div id="dateSelector_salesTime2">
+                                                        <select style="height: 30px; width: 80px" id="idYear_salesTime2" data="-1"></select>
+                                                        <select style="height: 30px; width: 40px" id="idMonth_salesTime2" data="-1"></select>
+                                                        <select style="height: 30px; width: 40px" id="idDay_salesTime2" data="-1"></select>
+                                                    </div>
+                                                    <input id="salesTime2" name="salesTime2" class="form-control" type="hidden"
+                                                           placeholder="时间格式:2019-08-08">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">保修期限</div>
+                                                    <div id="dateSelector_warrantyTime2">
+                                                        <select style="height: 30px; width: 80px" id="idYear_warrantyTime2" data="-1"></select>
+                                                        <select style="height: 30px; width: 40px" id="idMonth_warrantyTime2" data="-1"></select>
+                                                        <select style="height: 30px; width: 40px" id="idDay_warrantyTime2" data="-1"></select>
+                                                    </div>
+                                                    <input id="warrantyTime2" name="warrantyTime2" class="form-control" type="hidden"
+                                                           placeholder="时间格式:2019-08-08">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                                            <div class="form-group">
+                                                <input name="distributionChannel" class="form-control"
+                                                       style="display: none;" id="distributionChannelForAdd">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">销售渠道</div>
+                                                    <el-select v-model="selectedDistributionChannelsForAdd" clearable
+                                                               filterable allow-create>
+                                                        <el-option
+                                                                v-for="item in allDistributionChannels"
+                                                                :key="item"
+                                                                :label="item"
+                                                                :value="item">
+                                                        </el-option>
+                                                    </el-select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><input type="submit" class="btn btn-success btn-block" value="确认提交"/></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover text-center">
+            <thead>
+              <tr>
+                <th class="text-center">姓名</th>
+                <th class="text-center">身份证号</th>
+                <th class="text-center">详细信息</th>
+                <th class="text-center" colspan="2">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+        <hr>
+        <p class="text-center text-muted"><a href="http://www.beian.miit.gov.cn" target="_blank">粤ICP备19055771号-2</a></p>
+      </div>
+    </body>
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/bootstrap.min.js"></script>
+  </body>
+</html>
