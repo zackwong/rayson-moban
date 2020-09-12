@@ -8,7 +8,9 @@
     <meta name="applicable-device" content="pc,mobile">
     <link rel="apple-touch-icon" href="https://www.rayson.com.cn/images/assets/rayson-icon.jpg">
     <meta name="apple-mobile-web-app-title" content="超级管理员">
-    <link href="assets/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/element-ui-index.css">
+    <link rel="stylesheet" href="assets/paging.css">
     <script type="text/javascript">
       var userAgent = navigator.userAgent;
       if (userAgent.indexOf("Chrome") < 1 && userAgent.indexOf("Safari") < 1)
@@ -47,8 +49,8 @@
     <div class="container">
       <div class="row" style="margin-bottom:30px">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target=".bs-example-modal-lg" style="margin-top:30px;">新增员工账号</button>
-          <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#create-account" style="margin-top:30px;">新增员工账号</button>
+          <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="create-account">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
@@ -88,20 +90,133 @@
             <tr>
               <td class="text-center">张三</td>
               <td class="text-center">440681199506096587</td>
-              <td class="text-center"><button type="button" data-toggle="modal" data-target="#xxxx">查看</button></td>
-              <td class="text-center"><button type="button" data-toggle="modal" data-target="#xxxx">查看</button></td>
+              <td class="text-center"><button type="button" data-toggle="modal" data-target="#moreinfo-440681199506096587">查看</button></td>
+              <td class="text-center"><button type="button" data-toggle="modal" data-target="#account-permission-440681199506096587">查看</button></td>
               <td class="text-center"><button type="button" data-toggle="modal" data-target="#xxxx">编辑详细信息</button></td>
               <td class="text-center"><button type="button" data-toggle="modal" data-target="#xxxx">编辑账号权限</button></td>
               <td class="text-center"><button type="button" data-toggle="modal" data-target="#xxxx">删除</button></td>
             </tr>
           </tbody>
-          </table>
+        </table>
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="moreinfo-440681199506096587">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+              	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              	<h4 class="modal-title">详细信息</h4>
+              </div>
+              <div class="modal-body">
+              	<div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p>姓名：张三</p>
+                    <p>身份证号：440681199506096587</p>
+                    <p>性别：男</p>
+                    <p>民族：汉</p>
+                    <p>出生日期：1995年6月9日</p>
+                    <p>住址(身份证)：</p>
+                    <p>英文名：Peter</p>
+                    <p>籍贯：</p>
+                    <p>身高：</p>
+                    <p>体重：</p>
+                    <p>婚否：</p>
+                    <p>健康状况：</p>
+                    <p>文化程度：</p>
+                    <p>专长：</p>
+                    <p>联络地址：</p>
+                    <p>私人联络电话：</p>
+                    <p>私人QQ：</p>
+                    <p>私人微信：</p>
+                    <p>公司手机1：</p>
+                    <p>公司手机2：</p>
+                    <p>公司手机3：</p>
+                    <p>公司Email1：</p>
+                    <p>公司Email2：</p>
+                    <p>公司Email3：</p>
+                    <p>公司WhatsApp1：</p>
+                    <p>公司WhatsApp2：</p>
+                    <p>公司WhatsApp3：</p>
+                    <p>公司QQ1：</p>
+                    <p>公司QQ2：</p>
+                    <p>公司QQ3：</p>
+                    <p>公司微信1：</p>
+                    <p>公司微信2：</p>
+                    <p>公司微信3：</p>
+                    <p>公司领英1：</p>
+                    <p>公司领英2：</p>
+                    <p>公司领英3：</p>
+                    <p>公司Facebook1：</p>
+                    <p>公司Facebook2：</p>
+                    <p>公司Facebook3：</p>
+                    <p>公司抖音1：</p>
+                    <p>公司抖音2：</p>
+                    <p>公司抖音3：</p>
+                    <p>紧急联络人1姓名：</p>
+                    <p>紧急联络人1电话：</p>
+                    <p>紧急联络人1关系：</p>
+                    <p>紧急联络人2姓名：</p>
+                    <p>紧急联络人2电话：</p>
+                    <p>紧急联络人2关系：</p>
+                    <p>紧急联络人3姓名：</p>
+                    <p>紧急联络人3电话：</p>
+                    <p>紧急联络人3关系：</p>
+                    <p>前工作单位1名称：</p>
+                    <p>前工作单位1职务：</p>
+                    <p>前工作单位1待遇：</p>
+                    <p>前工作单位1就职时间：</p>
+                    <p>前工作单位2名称：</p>
+                    <p>前工作单位2职务：</p>
+                    <p>前工作单位2待遇：</p>
+                    <p>前工作单位2就职时间：</p>
+                    <p>前工作单位3名称：</p>
+                    <p>前工作单位3职务：</p>
+                    <p>前工作单位3待遇：</p>
+                    <p>前工作单位3就职时间：</p>
+                    <p>家庭成员1姓名：</p>
+                    <p>家庭成员1性别：</p>
+                    <p>家庭成员1关系：</p>
+                    <p>家庭成员2姓名：</p>
+                    <p>家庭成员2性别：</p>
+                    <p>家庭成员2关系：</p>
+                    <p>家庭成员3姓名：</p>
+                    <p>家庭成员3性别：</p>
+                    <p>家庭成员3关系：</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <hr>
-        <p class="text-center text-muted"><a href="http://www.beian.miit.gov.cn" target="_blank">粤ICP备19055771号-2</a></p>
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="account-permission-440681199506096587">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">账号权限</h4>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p>仓管</p>
+                    <p>分析统计</p>
+                    <p>机身码查询</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </body>
+      <hr>
+      <p class="text-center text-muted"><a href="http://www.beian.miit.gov.cn" target="_blank">粤ICP备19055771号-2</a></p>
+    </div>
     <script src="assets/jquery.min.js"></script>
     <script src="assets/bootstrap.min.js"></script>
+    <script src="assets/util.js"></script>
+    <script src="assets/paging.js"></script>
+    <script src="assets/timePicker.js"></script>
   </body>
+  <!-- import Vue before Element -->
+  <script src="assets/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="assets/vue-index.js"></script>
 </html>
