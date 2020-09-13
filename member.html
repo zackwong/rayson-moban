@@ -754,7 +754,7 @@
               <td class="text-center"><button type="button" data-toggle="modal" data-target="#moreinfo-440681199506096587">查看</button></td>
               <td class="text-center"><button type="button" data-toggle="modal" data-target="#edit-moreinfo-440681199506096587">编辑详细信息</button></td>
               <td class="text-center"><button type="button" data-toggle="modal" data-target="#account-permission-440681199506096587">查看</button></td>
-              <td class="text-center"><button type="button" data-toggle="modal" data-target="#">编辑账号权限</button></td>
+              <td class="text-center"><button type="button" data-toggle="modal" data-target="#edit-account-permission-440681199506096587">编辑账号权限</button></td>
               <td class="text-center"><button type="button" data-toggle="modal" data-target="#xxxx">重置密码</button></td>
               <td class="text-center"><button type="button" data-toggle="modal" data-target="#quit-440681199506096587">离职</button></td>
               <td class="text-center"><button type="button" data-toggle="modal" data-target="#xxxx">删除</button></td>
@@ -1562,6 +1562,41 @@
             </div>
           </div>
         </div>
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="edit-account-permission-440681199506096587">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">编辑账号权限</h4>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center" style="margin-bottom:20px">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" value="">员工管理
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center" style="margin-bottom:20px">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" value="" checked="checked">账号信息
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 text-center" style="margin-bottom:20px">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" value="" checked="checked">修改密码
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="quit-440681199506096587">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -1594,16 +1629,17 @@
       <hr>
       <p class="text-center text-muted"><a href="http://www.beian.miit.gov.cn" target="_blank">粤ICP备19055771号-2</a></p>
       <h4>备忘说明</h4>
-      <h5>1、所有操作，点击确认或者提交后，会弹出窗口提示是否成功。</h5>
-      <h5>2、新增员工账号提交后，系统默认授权《账号信息》和《修改密码》两项，密码默认设置为Abc.123456</h5>
-      <h5>3、新增员工账号必填项如出现没有填写，提交时弹出出窗口提示。</h5>
-      <h5>4、点击重置密码按钮后，账号密码自动重置为Abc.123456</h5>
-      <h5>5、点击离职按钮，输入离职日期后，账号处理离职状态，不能登录，系统自动取消所有账号权限</h5>
-      <h5>6、取消离职状态后，账号变为正常状态，系统默认授权《账号信息》和《修改密码》两项，密码默认设置为Abc.123456</h5>
-      <h5>7、点击编辑详细信息后，自动读取账号相关数据，其中项目出现1、2、3这类的，当1、2、3都填满自动出现4、5、6，类似仓管和超级管理员中保修信息效果一样</h5>
-      <h5>8、每20条员工信息一页，采取分页模式，与仓管和超级管理员显示数据效果一样</h5>
-      <h5>9、导航左侧显示当前登录账号姓名，右侧显示已经拥有的账号权限，可以点击跳转。</h5>
-      <h5>10、账号中出生日期(系统自动读取身份证号)、年龄(由出生日期自动计算)、工龄(由入职时间自动计算)，不需人工填写。</h5>
+      <h5>1、整个系统身份证号唯一，作为账号登录名。</h5>
+      <h5>2、所有操作，点击确认或者提交后，会弹出窗口提示是否成功。</h5>
+      <h5>3、新增员工账号提交后，系统默认授权《账号信息》和《修改密码》两项，密码默认设置为Abc.123456</h5>
+      <h5>4、新增员工账号必填项如出现没有填写，提交时弹出出窗口提示。</h5>
+      <h5>5、点击重置密码按钮后，账号密码自动重置为Abc.123456</h5>
+      <h5>6、点击离职按钮，输入离职日期后，账号处理离职状态，不能登录，系统自动取消所有账号权限</h5>
+      <h5>7、取消离职状态后，账号变为正常状态，系统默认授权《账号信息》和《修改密码》两项，密码默认设置为Abc.123456</h5>
+      <h5>8、点击编辑详细信息后，自动读取账号相关数据，其中项目出现1、2、3这类的，当1、2、3都填满自动出现4、5、6，类似仓管和超级管理员中保修信息效果一样</h5>
+      <h5>9、每20条员工信息一页，采取分页模式，与仓管和超级管理员显示数据效果一样</h5>
+      <h5>10、导航左侧显示当前登录账号姓名，右侧显示已经拥有的账号权限，可以点击跳转。</h5>
+      <h5>11、账号中出生日期(系统自动读取身份证号)、年龄(由出生日期自动计算)、工龄(由入职时间自动计算)，不需人工填写。</h5>
     </div>
     <script src="assets/jquery.min.js"></script>
     <script src="assets/bootstrap.min.js"></script>
