@@ -229,10 +229,10 @@
                     <p>性别：男</p>
                     <p>民族：汉</p>
                     <p>出生日期：1995年6月9日(系统自动读取身份证号)</p>
-                    <p>年龄：25岁(由出生日期与使用当天实际日期之差自动计算，假如6月9日是出生日，下一年6月9日当天年龄会自动增加1岁)</p>
                     <p>住址(身份证)：</p>
-                    <p>入职时间：</p>
-                    <p>工龄：3年10个月(由入职时间与使用当天实际日期之差自动计算，假如入职时间是2020年11月2日，下个月的11月2日当天工龄会自动增加1个月)</p>
+                    <p>年龄：25岁(由出生日期与使用当天实际日期之差自动计算，假如6月9日是出生日，下一年6月9日当天年龄会自动增加1岁)</p>
+                    <p>入职时间：2020年11月2日</p>
+                    <p>工龄：0年1个月(由入职时间与使用当天实际日期之差自动计算，假如入职时间是2020年11月2日，下个月的11月2日当天工龄会自动增加1个月)</p>
                     <p>英文名：Peter</p>
                     <p>籍贯：</p>
                     <p>身高(cm)：</p>
@@ -439,6 +439,25 @@
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
                       <div class="form-group">
                         <div class="input-group">
+                          <div class="input-group-addon">籍贯</div>
+                          <input name="orderId" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-addon">婚否</div>
+                          <select class="form-control">
+                            <option value="0" selected="selected">未婚</option>
+                            <option value="1">已婚</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                      <div class="form-group">
+                        <div class="input-group">
                           <div class="input-group-addon">身高</div>
                           <input name="orderId" class="form-control">
                           <div class="input-group-addon">cm</div>
@@ -451,17 +470,6 @@
                           <div class="input-group-addon">体重</div>
                           <input name="orderId" class="form-control">
                           <div class="input-group-addon">kg</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
-                      <div class="form-group">
-                        <div class="input-group">
-                          <div class="input-group-addon">婚否</div>
-                          <select class="form-control">
-                            <option value="0" selected="selected">未婚</option>
-                            <option value="1">已婚</option>
-                          </select>
                         </div>
                       </div>
                     </div>
@@ -501,38 +509,6 @@
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
                       <div class="form-group">
                         <div class="input-group">
-                          <div class="input-group-addon">任职部门</div>
-                          <select class="form-control">
-                            <option value="0" selected="selected">行政部</option>
-                            <option value="1">外贸电商部</option>
-                            <option value="2">内销电商部</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
-                      <div class="form-group">
-                        <div class="input-group">
-                          <div class="input-group-addon">职位</div>
-                          <select class="form-control">
-                            <option value="0" selected="selected">主任</option>
-                            <option value="1">经理</option>
-                            <option value="2">员工</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:20px">
-                      <div class="form-group">
-                        <div class="input-group">
-                          <div class="input-group-addon">联络地址</div>
-                          <input name="orderId" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
-                      <div class="form-group">
-                        <div class="input-group">
                           <div class="input-group-addon">私人联络电话</div>
                           <input name="orderId" class="form-control">
                         </div>
@@ -554,6 +530,39 @@
                         </div>
                       </div>
                     </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:20px">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-addon">联络地址</div>
+                          <input name="orderId" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-addon">任职部门</div>
+                          <select class="form-control">
+                            <option value="0" selected="selected">行政部</option>
+                            <option value="1">外贸电商部</option>
+                            <option value="2">内销电商部</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-addon">职位</div>
+                          <select class="form-control">
+                            <option value="0" selected="selected">主任</option>
+                            <option value="1">经理</option>
+                            <option value="2">员工</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="margin-bottom:20px">
                       <div class="form-group">
                         <div class="input-group">
